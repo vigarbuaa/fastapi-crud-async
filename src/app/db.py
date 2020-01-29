@@ -1,4 +1,5 @@
 import os
+import uuid
 from peewee import *
 from enum import Enum
 database = MySQLDatabase('stock', **{'charset': 'utf8', 'use_unicode': True, 'host': 'localhost', 'user': 'root', 'password': 'root'})
@@ -52,7 +53,6 @@ class BaseModel(Model):
     class Meta:
         database = database
 
-
 class Notes(BaseModel):
     id = CharField(column_name='id', primary_key=True)
     title = CharField(column_name='title')
@@ -62,5 +62,15 @@ class Notes(BaseModel):
     class Meta:
         table_name = 'notes'
 
-
+# add test code to create table
 database.create_tables([Notes])
+payload={
+    "title":"hello",
+    "description":"hello  world"
+}
+# add test code to insert data
+query = Notes.create(
+    id=uuid.uuid1(),
+    title=payload["title"],
+    description=payload["description"]
+)
