@@ -1,17 +1,7 @@
 import os
-from peewee import (
-    AutoField,
-    CharField,
-    Database,
-    DateTimeField,
-    FloatField,
-    Model,
-    MySQLDatabase,
-    PostgresqlDatabase,
-    SqliteDatabase,
-    chunked,
-)
-
+from peewee import *
+from enum import Enum
+database = MySQLDatabase('stock', **{'charset': 'utf8', 'use_unicode': True, 'host': 'localhost', 'user': 'root', 'password': 'root'})
 
 class Driver(Enum):
     SQLITE = "sqlite"
@@ -54,21 +44,6 @@ def init_postgresql(settings: dict):
     db = PostgresqlDatabase(**settings)
     return db
 
-
-# peewee
-DATABASE_URL = os.getenv("DATABASE_URL")
-# engine = create_engine(DATABASE_URL)
-metadata = MetaData()
-# notes = Table(
-#    "notes",
-#    metadata,
-#    Column("id", Integer, primary_key=True),
-#    Column("title", String(50)),
-#    Column("description", String(50)),
-#    Column("created_date", DateTime, default=func.now(), nullable=False),
-# )
-
-
 class UnknownField(object):
     def __init__(self, *_, **__): pass
 
@@ -82,11 +57,10 @@ class Notes(BaseModel):
     id = CharField(column_name='id', primary_key=True)
     title = CharField(column_name='title')
     description = CharField(column_name='description')
-    created_date: datetime = DateTimeField(column_name="created_date")
+    created_date = DateTimeField(column_name="created_date")
 
     class Meta:
         table_name = 'notes'
 
 
-# databases query builder
-database = Database(DATABASE_URL)
+database.create_tables([Notes])
