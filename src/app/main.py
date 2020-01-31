@@ -1,16 +1,16 @@
-from fastapi import FastAPI
 from app.api import notes, ping
-#from app.db import database, engine, metadata
-from app.db import database
+from app.db import database, engine, metadata
+from fastapi import FastAPI
 
-# metadata.create_all(engine)
+metadata.create_all(engine)
 
 app = FastAPI()
 
+
 @app.on_event("startup")
 async def startup():
-    #await database.connect()
-    print("web server startup!!!")
+    await database.connect()
+
 
 @app.on_event("shutdown")
 async def shutdown():
