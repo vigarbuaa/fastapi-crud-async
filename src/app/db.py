@@ -54,13 +54,14 @@ class BaseModel(Model):
         database = database
 
 class Notes(BaseModel):
-    id = CharField(column_name='id', primary_key=True)
+    id = IntegerField(column_name='id', primary_key=True)
     title = CharField(column_name='title')
     description = CharField(column_name='description')
-    created_date = DateTimeField(column_name="created_date")
+    # created_date = DateTimeField(column_name="created_date")
 
     class Meta:
         table_name = 'notes'
+
 
 # add test code to create table
 database.create_tables([Notes])
@@ -68,9 +69,19 @@ payload={
     "title":"hello",
     "description":"hello  world"
 }
-# add test code to insert data
 query = Notes.create(
-    id=uuid.uuid1(),
     title=payload["title"],
     description=payload["description"]
 )
+#
+all = Notes.select().execute()
+data=[ elem for elem in all]
+print(type(data))
+for elem in data:
+    print(elem.title+"|"+elem.description+"|")
+print(type(all))
+print(all)
+
+#  get elem
+note_elem = Notes.select().where(Notes.id==1).get()
+print("note_elem:" + note_elem.title)
