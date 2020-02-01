@@ -44,8 +44,10 @@ async def update_person(payload: PersonSchema, id: int = Path(..., gt=0),):
 
     response_object = {
         "id": person_id,
-        "title": payload.title,
-        "description": payload.description,
+        "idcard": payload.idcard,
+        "name": payload.name,
+        "address": payload.address,
+        "hometown":payload.hometown,
     }
     return response_object
 
@@ -55,7 +57,5 @@ async def delete_person(id: int = Path(..., gt=0)):
     person = await person_crud.get(id)
     if not person:
         raise HTTPException(status_code=404, detail="Person not found")
-
     await person_crud.delete(id)
-
     return person
