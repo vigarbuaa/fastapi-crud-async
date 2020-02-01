@@ -18,7 +18,8 @@ Test out the following routes:
 1. [http://localhost:8002/docs](http://localhost:8002/docs)
 1. [http://localhost:8002/notes](http://localhost:8002/notes)
 
-# use peewee to handle Db
+# 增加了人员信息的增删改查接口。
+# 后续做前端工具对接。
 
 
 
