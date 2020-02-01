@@ -1,6 +1,6 @@
 from typing import List
 
-from app.api import crud
+from app.api import notes_crud
 from app.api.models import NoteDB, NoteSchema
 from fastapi import APIRouter, HTTPException, Path
 

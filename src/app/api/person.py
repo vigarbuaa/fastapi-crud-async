@@ -1,6 +1,6 @@
 from typing import List
 
-from app.api import crud
+from app.api import person_crud
 from app.api.models import PersonDB, PersonSchema
 from fastapi import APIRouter, HTTPException, Path
 
