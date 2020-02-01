@@ -1,4 +1,4 @@
-from app.api import notes, ping
+from app.api import notes, ping,person
 from app.db import database, engine, metadata
 from fastapi import FastAPI
 
@@ -19,3 +19,4 @@ async def shutdown():
 
 app.include_router(ping.router)
 app.include_router(notes.router, prefix="/notes", tags=["notes"])
+app.include_router(person.router, prefix="/person", tags=["person"])
