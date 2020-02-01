@@ -21,5 +21,15 @@ notes = Table(
     Column("created_date", DateTime, default=func.now(), nullable=False),
 )
 
+person = Table(
+    "person_info",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("name", String(50)),
+    Column("idcard", String(50)),
+    Column("hometown", String(50)),
+    Column("address", String(50)),
+    Column("created_date", DateTime, default=func.now(), nullable=False),
+)
 # databases query builder
 database = Database(DATABASE_URL)
