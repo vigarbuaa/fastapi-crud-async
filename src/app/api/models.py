@@ -6,10 +6,10 @@ class NoteSchema(BaseModel):
     description: str = Field(..., min_length=3, max_length=50)
 
 class PersonSchema(BaseModel):
-    name: str = Field(..., min_length=3, max_length=50)
-    idcard: str = Field(..., min_length=3, max_length=50)
-    hometown: str = Field(..., min_length=3, max_length=50)
-    address: str = Field(..., min_length=3, max_length=50)
+    name: str = Field(..., min_length=1, max_length=50)
+    idcard: str = Field(..., min_length=1, max_length=50)
+    hometown: str = Field(..., min_length=1, max_length=50)
+    address: str = Field(..., min_length=1, max_length=50)
 
 class NoteDB(NoteSchema):
     id: int

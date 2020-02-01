@@ -1,33 +1,37 @@
-from app.api.models import NoteSchema
-from app.db import notes, database
+from app.api.models import PersonSchema
+from app.db import person, database
 
 
-async def post(payload: NoteSchema):
-    query = notes.insert().values(title=payload.title, description=payload.description)
+async def post(payload: PersonSchema):
+    query = person.insert().values(
+        idcard= payload.idcard,
+        name= payload.name,
+        address= payload.address,
+        hometown=payload.hometown)
     return await database.execute(query=query)
 
 
 async def get(id: int):
-    query = notes.select().where(id == notes.c.id)
+    query = person.select().where(id == person.c.id)
     return await database.fetch_one(query=query)
 
 
 async def get_all():
-    query = notes.select()
+    query = person.select()
     return await database.fetch_all(query=query)
 
 
-async def put(id: int, payload: NoteSchema):
+async def put(id: int, payload: PersonSchema):
     query = (
-        notes
+        person
         .update()
-        .where(id == notes.c.id)
+        .where(id == person.c.id)
         .values(title=payload.title, description=payload.description)
-        .returning(notes.c.id)
+        .returning(person.c.id)
     )
     return await database.execute(query=query)
 
 
 async def delete(id: int):
-    query = notes.delete().where(id == notes.c.id)
+    query = person.delete().where(id == person.c.id)
     return await database.execute(query=query)
