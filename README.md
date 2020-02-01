@@ -15,11 +15,9 @@ $ docker-compose up -d --build
 Test out the following routes:
 
 1. [http://localhost:8002/ping](http://localhost:8002/ping)
-1. [http://localhost:8002/docs](http://localhost:8002/docs)
-1. [http://localhost:8002/notes](http://localhost:8002/notes)
+2. [http://localhost:8002/docs](http://localhost:8002/docs)
+3. [http://localhost:8002/notes](http://localhost:8002/notes)
+4. [http://localhost:8002/person](http://localhost:8002/person)
 
 # 增加了人员信息的增删改查接口。
 # 后续做前端工具对接。
-
-
-
